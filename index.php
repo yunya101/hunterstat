@@ -1,5 +1,6 @@
 <?php
 session_start();
+header('Content-Type: text/html; charset=UTF-8');
 
 ?>
 <!DOCTYPE html>
@@ -19,26 +20,36 @@ session_start();
     <div id="search-container">
         <form action="index.php" method="get" id="form">
             <label>Введите заголовок вакансии</label>
+            <div class="err-container">
             <input type="text" name="title" placeholder="Вакансия" id="form_title">
             <span id="err_title" class="err">Заголовок вакансии не может быть пустым!</span>
+            </div>
             <label>Введите ключевые слова через пробел (регистр не учитывается)</label>
+            <div class="err-container">
             <input type="text" name="keywords" placeholder="Ключевые слова" id="form_keys">
             <span id="err_keys" class="err">Поле должно содержать хотя бы одно ключевое слово!</span>
+            </div>
             <button type="submit">Найти</button>
         </form>
     </div>
 
 <?php
-require_once 'lib.php';
+require_once 'search.php';
 ?>
     <script>
         $('#form').submit(function() {
             var title = $('#form_title').val()
             var keys = $('#form_keys').val()
 
-            if (title == '' || keys == '') {
-                $('.err').css('display', 'block')
-                $('input').css('border-color', 'red')
+            if (title == '') {
+                $('#err_title').css('display', 'block')
+                $('#form_title').css('border-color', 'red')
+                return false
+            }
+
+            if (keys == '') {
+                $('#err_keys').css('display', 'block')
+                $('#form_keys').css('border-color', 'red')
                 return false
             }
 
