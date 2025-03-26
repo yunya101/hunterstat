@@ -13,8 +13,8 @@
     <div id="header">
         <h1>Hunter Statistic</h1>
         <span id="info">
-        <a id="git" href="https://github.com/yunya101/hunterstat"><img class="icon" src="assets/github.png"></a>
-        <p>Alpha 0.2</p>
+            <a id="git" href="https://github.com/yunya101/hunterstat"><img class="icon" src="assets/github.png"></a>
+            <p>Alpha 0.2</p>
         </span>
     </div>
     <div id="content">
@@ -29,6 +29,22 @@
                 <div class="err-container">
                     <input type="text" name="keywords" placeholder="Ключевые слова" id="form_keys">
                     <span id="err_keys" class="err">Поле должно содержать хотя бы одно ключевое слово!</span>
+                </div>
+                <div id="selectors">
+                    <label>Опыт работы:</label>
+                    <select name="exp" class="select">
+                        <option value="none">Любой</option>
+                        <option value="noExperience">Без опыта</option>
+                        <option value="between1And3">От 1 до 3 лет</option>
+                        <option value="between3And6">От 3 до 6 лет</option>
+                        <option value="moreThan6">Более 6 лет</option>
+                    </select>
+                    <label>Выборка</label>
+                    <select name="select" class="select">
+                        <option value="true">Только с названием в заголовке</option>
+                        <option value="false">Классическая</option>
+                    </select>
+                    
                 </div>
                 <button type="submit">Найти</button>
             </form>

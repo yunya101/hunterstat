@@ -8,7 +8,7 @@
     display: none;
     border: 1px solid white;
     color: white;
-    width: 20%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -20,6 +20,19 @@
     margin-top: 5px;
     padding: auto;
     text-align: center;
+}
+
+.select {
+    display: inline;
+    background-color: #333333;
+    border: 1px solid #6A0AAB;
+}
+
+#selectors {
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+
 }
 
 #info p {
@@ -43,11 +56,13 @@ span {
 label {
     font-size: 20px;
     margin-bottom: 3px;
+    margin-left: 5px;
     color: white;
 }
 
 * {
     font-family: 'Tektur';
+    color: white;
 }
 
 body {
@@ -62,12 +77,16 @@ body {
     right: 0;
     left: 0;
     width: 100%;
-    height: 8%;
+    height: 80px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #content {
     padding-top: 100px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 form {
@@ -81,6 +100,9 @@ form {
     align-items: center;
     text-align: center;
     place-items: center;
+    width: 60%;
+    margin: 0 auto;
+    display: block;
 }
 
 input {
@@ -88,7 +110,7 @@ input {
     text-align: center;
     font-size: 18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    width: 50%;
+    width: 100%;
     background-color: #333333;
     color: white;
     height: 50px;
@@ -117,7 +139,8 @@ button:hover {
 
 #searched {
     border: 2px solid rgb(41, 41, 41);
-    width: 50%;
+    width: 60%;
+    display: block;
     font-size: 20px;
     padding: 10px;
     margin: 0 auto;

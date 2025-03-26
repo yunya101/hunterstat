@@ -18,15 +18,16 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
         'text' => $title,
         'per_page' => 100
     ];
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, [
-        'User-Agent: hunterstatistic/1.0 (egoryunev@yandex.ru)'
-    ]);
 
+    if (isset($_GET['exp']) && $_GET['exp'] !== 'none') {
+        $data['experience'] = $_GET['exp'];
+    }
+
+    $curl = set_curl();
     $responses = array();
     for ($i = 0; $i < 20; $i++) {
         $url = 'https://api.hh.ru/vacancies?' . http_build_query($data) . '&page=' . $i;
+
         curl_setopt($curl, CURLOPT_URL, $url);
         $response = curl_exec($curl);
         if ($response == false) {
@@ -38,37 +39,38 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
 
     curl_close($curl);
 
-    $jsons = array();
-    $vacancies = array();
+    $items = array();
     for ($i = 0; $i < count($responses); $i++) {
         $json = json_decode($responses[$i], true);
         if (count($json['items']) == 0 || !isset($json['items'])) {
             break;
         }
-        $vacancies[$i] = $json['items'];
+        $items[$i] = $json['items'];
     }
 
-   
-    $selected = 0;
 
-    foreach ($vacancies as $index => $response) {
-        foreach ($response as $j => $vacancy) {
-            $selected++;
-            $snippet = $vacancy['snippet'];
+    $count_vacancies = 0;
 
-            foreach ($snippet as $key => $val) {
-                $val = mb_strtolower($val, 'UTF-8');
-                foreach ($keyword_count as $keyword => $count) {
-                    if (strpos($val, $keyword) !== false) {
-                        $keyword_count[$keyword] = $count + 1;
-                    }
+    foreach ($items as $i => $item) {
+        foreach ($item as $j => $vacancy) {
+            $name = mb_strtolower($vacancy['name'], 'UTF-8');
+
+            if ($_GET['select'] == 'true' && strpos($name, $title) === false) {
+                continue;
+            }
+            $count_vacancies++;
+            $requirement = mb_strtolower($vacancy['snippet']['requirement'], 'UTF-8');
+            foreach ($keyword_count as $keyword => $count) {
+                if (strpos($requirement, $keyword) !== false) {
+                    $keyword_count[$keyword] = $count + 1;
                 }
             }
         }
     }
     echo '<div id="searched">';
-    echo '<span>Всего вакансий: ' . $json['found'] . ' | </span>';
-    echo '<span>Выборка из ' . $selected . ' вакансий</span><br>';
+    echo "<h3>Статистика по вакансии: $title</h3>";
+    echo '<p>Всего вакансий найденных hh: ' . $json['found'] . '</p>';
+    echo "<p>Выборка из $count_vacancies вакансий</p>";
 
     foreach ($keyword_count as $key => $count) {
         echo '<p class="result">' . $key . ': ' . $count . '</p>';
@@ -79,4 +81,15 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
 function sanitize($str): string
 {
     return strip_tags($str);
+}
+
+function set_curl()
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        'User-Agent: hunterstatistic/1.0 (egoryunev@yandex.ru)'
+    ]);
+
+    return $curl;
 }
