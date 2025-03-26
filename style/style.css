@@ -12,12 +12,18 @@
     margin: 0 auto;
 }
 
-#git {
+#info {
     display: inline-block;
     position: fixed;
     right: 0;
     margin-right: 10px;
     margin-top: 5px;
+    padding: auto;
+    text-align: center;
+}
+
+#info p {
+    margin: 0;
 }
 
 .icon {

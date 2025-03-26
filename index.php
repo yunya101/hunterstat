@@ -12,7 +12,10 @@
 <body>
     <div id="header">
         <h1>Hunter Statistic</h1>
+        <span id="info">
         <a id="git" href="https://github.com/yunya101/hunterstat"><img class="icon" src="assets/github.png"></a>
+        <p>Alpha 0.2</p>
+        </span>
     </div>
     <div id="content">
         <div id="search-container">

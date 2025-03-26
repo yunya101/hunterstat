@@ -1,6 +1,5 @@
 <?php
 if (isset($_GET['title']) && isset($_GET['keywords'])) {
-    echo '<div id="searched">';
     $title = sanitize($_GET['title']);
     $str_keys = sanitize($_GET['keywords']);
     $keywords = explode(' ', $str_keys);
@@ -49,7 +48,7 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
         $vacancies[$i] = $json['items'];
     }
 
-    echo '<span>Всего вакансий: ' . $json['found'] . ' | </span>';
+   
     $selected = 0;
 
     foreach ($vacancies as $index => $response) {
@@ -67,7 +66,8 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
             }
         }
     }
-
+    echo '<div id="searched">';
+    echo '<span>Всего вакансий: ' . $json['found'] . ' | </span>';
     echo '<span>Выборка из ' . $selected . ' вакансий</span><br>';
 
     foreach ($keyword_count as $key => $count) {
