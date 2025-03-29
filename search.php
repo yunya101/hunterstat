@@ -8,10 +8,11 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
         exit;
     }
 
-    $keyword_count = array();
+    $statistic = array();
 
     for ($i = 0; $i < count($keywords); $i++) {
-        $keyword_count[strtolower($keywords[$i])] = 0;
+        $statistic[strtolower($keywords[$i])]['count'] = 0;
+        $statistic[strtolower($keywords[$i])]['links'] = array();
     }
 
     $data = [
@@ -60,9 +61,10 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
             }
             $count_vacancies++;
             $requirement = mb_strtolower($vacancy['snippet']['requirement'], 'UTF-8');
-            foreach ($keyword_count as $keyword => $count) {
+            foreach ($statistic as $keyword => $count) {
                 if (strpos($requirement, $keyword) !== false) {
-                    $keyword_count[$keyword] = $count + 1;
+                    $statistic[$keyword]['count'] = $statistic[$keyword]['count'] + 1;
+                    array_push($statistic[$keyword]['links'], 'https://hh.ru/vacancy/' . $vacancy['id']);
                 }
             }
         }
@@ -72,8 +74,16 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
     echo '<p>Всего вакансий найденных hh: ' . $json['found'] . '</p>';
     echo "<p>Выборка из $count_vacancies вакансий</p>";
 
-    foreach ($keyword_count as $key => $count) {
-        echo '<p class="result">' . $key . ': ' . $count . '</p>';
+    foreach ($statistic as $key => $arr) {
+        echo '<p class="result">' . $key . ': ' . $statistic[$key]['count'] . '<button class="drop_button">Ссылки ▼</button></p>';
+        $links = $statistic[$key]['links'];
+
+        echo '<div class="links">';
+        foreach ($links as $index => $link) {
+            echo '<a class="link" href=' . $link . '>' . $link . '</a>';
+        }
+
+        echo '</div>';
     }
     echo '</div>';
 }

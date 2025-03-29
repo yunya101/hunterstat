@@ -14,7 +14,7 @@
         <h1>Hunter Statistic</h1>
         <span id="info">
             <a id="git" href="https://github.com/yunya101/hunterstat"><img class="icon" src="assets/github.png"></a>
-            <p>Alpha 0.2</p>
+            <p>Alpha 0.4</p>
         </span>
     </div>
     <div id="content">
@@ -44,7 +44,7 @@
                         <option value="true">Только с названием в заголовке</option>
                         <option value="false">Классическая</option>
                     </select>
-                    
+
                 </div>
                 <button type="submit">Найти</button>
             </form>
@@ -54,6 +54,7 @@
         require_once 'search.php';
         ?>
         <script>
+            $('.links').hide();
             $('#form').submit(function () {
                 var title = $('#form_title').val()
                 var keys = $('#form_keys').val()
@@ -72,6 +73,17 @@
 
                 return true
             })
+
+            $('.drop_button').click(function (e) {
+                e.stopPropagation();
+
+                const linksDiv = $(this).closest('.result').next('.links');
+
+                linksDiv.toggle();
+                $(this).html(function (_, html) {
+                    return html.includes('▼') ? html.replace('▼', '▲') : html.replace('▲', '▼');
+                });
+            });
         </script>
     </div>
 </body>

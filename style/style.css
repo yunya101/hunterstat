@@ -12,6 +12,16 @@
     margin: 0 auto;
 }
 
+.link {
+    display: block;
+}
+
+.drop_button {
+    position: relative;
+    float: right;
+    scale: 1;
+}
+
 #info {
     display: inline-block;
     position: fixed;
