@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" type="image/png" sizes="16x16"  href="assets/favicon-16x16.png">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Hunter Statistic</title>
 </head>
@@ -14,7 +15,7 @@
         <h1>Hunter Statistic</h1>
         <span id="info">
             <a id="git" href="https://github.com/yunya101/hunterstat"><img class="icon" src="assets/github.png"></a>
-            <p>Alpha 0.4</p>
+            <p>Beta 1.0</p>
         </span>
     </div>
     <div id="content">

@@ -147,7 +147,7 @@ button:hover {
     color: white;
 }
 
-#searched {
+.searched {
     border: 2px solid rgb(41, 41, 41);
     width: 60%;
     display: block;

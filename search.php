@@ -69,13 +69,15 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
             }
         }
     }
-    echo '<div id="searched">';
+
+    echo '<div class="searched">';
     echo "<h3>Статистика по вакансии: $title</h3>";
     echo '<p>Всего вакансий найденных hh: ' . $json['found'] . '</p>';
     echo "<p>Выборка из $count_vacancies вакансий</p>";
 
     foreach ($statistic as $key => $arr) {
-        echo '<p class="result">' . $key . ': ' . $statistic[$key]['count'] . '<button class="drop_button">Ссылки ▼</button></p>';
+        $precent = number_format(($statistic[$key]['count'] * 100) / $count_vacancies, 1);
+        echo '<p class="result">' . $key . ': ' . $statistic[$key]['count'] . ' | ' . $precent . '%<button class="drop_button">Ссылки ▼</button></p>';
         $links = $statistic[$key]['links'];
 
         echo '<div class="links">';
@@ -86,6 +88,7 @@ if (isset($_GET['title']) && isset($_GET['keywords'])) {
         echo '</div>';
     }
     echo '</div>';
+
 }
 
 function sanitize($str): string
