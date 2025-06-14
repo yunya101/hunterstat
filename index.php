@@ -15,7 +15,7 @@
         <h1>Hunter Statistic</h1>
         <span id="info">
             <a id="git" href="https://github.com/yunya101/hunterstat"><img class="icon" src="assets/github.png"></a>
-            <p>Beta 1.0</p>
+            <p>1.0</p>
         </span>
     </div>
     <div id="content">
